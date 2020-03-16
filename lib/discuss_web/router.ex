@@ -20,9 +20,7 @@ defmodule DiscussWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", DiscussWeb do
-    pipe_through :api
-
-    get "/leco", PageController, :leco
-  end
+  # scope "/api", DiscussWeb do
+  #   pipe_through :api
+  # end
 end
