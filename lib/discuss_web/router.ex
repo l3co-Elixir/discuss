@@ -17,12 +17,14 @@ defmodule DiscussWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    get "/java", LanguageController, :java
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", DiscussWeb do
-    pipe_through :api
+  # scope "/api", DiscussWeb do
+  #   pipe_through :api
 
-    get "/leco", PageController, :leco
-  end
+  #   get "/leco", PageController, :leco
+  # end
 end
