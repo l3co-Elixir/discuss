@@ -4,8 +4,9 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Topic
   alias Discuss.TopicService
 
-  def show_all(conn, params) do
-    TopicService.show_all()
+  def index(conn, _params) do
+    topics = TopicService.get_all()
+    render(conn, "index.html", topics: topics)
   end
 
   def new(conn, _params) do
@@ -15,8 +16,13 @@ defmodule DiscussWeb.TopicController do
 
   def create(conn, %{"topic" => topic}) do
     case TopicService.save(topic) do
-      # {:ok, _} -> redirect(conn, to: "/topics")
-      {:error, changeset} -> render(conn, "new.html", changeset: changeset)
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Topic Created")
+        |> redirect(to: "/")
+
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
     end
   end
 end

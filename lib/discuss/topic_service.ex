@@ -7,7 +7,7 @@ defmodule Discuss.TopicService do
     |> Repo.insert()
   end
 
-  def show_all() do
-    Repo.all(%Topic{})
+  def get_all() do
+    Repo.all(Discuss.Topic)
   end
 end
