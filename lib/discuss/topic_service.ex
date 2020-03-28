@@ -34,7 +34,7 @@ defmodule Discuss.TopicService do
   end
 
   def delete(id) do
-    topic = Repo.get(Topic, id)
-    Repo.delete!(topic)
+    Repo.get!(Topic, id)
+    |> Repo.delete!
   end
 end
