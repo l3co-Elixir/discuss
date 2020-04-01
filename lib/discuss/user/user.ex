@@ -16,6 +16,8 @@ defmodule Discuss.User do
     |> validate_required([:email, :provider, :token])
   end
 
+  def get(id), do: Repo.get(User, id)
+
   def insert_or_update(changeset) do
     case Repo.get_by(User, email: changeset.changes.email) do
       nil -> Repo.insert(changeset)
