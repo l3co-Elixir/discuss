@@ -55,6 +55,10 @@ defmodule DiscussWeb.TopicController do
     |> redirect(to: Routes.topic_path(conn, :index))
   end
 
+  @spec check_topic_owner(%{assigns: atom | %{user: atom | %{id: any}}, params: map}, any) :: %{
+          assigns: atom | map,
+          params: map
+        }
   def check_topic_owner(conn, _params) do
     %{params: %{"id" => topic_id}} = conn
     user = conn.assigns.user
