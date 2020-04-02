@@ -8,6 +8,7 @@ defmodule Discuss.User do
     field :email, :string
     field :provider, :string
     field :token, :string
+    has_many :topics, Discuss.Topic
   end
 
   def changeset(struct, params \\ %{}) do
@@ -16,7 +17,9 @@ defmodule Discuss.User do
     |> validate_required([:email, :provider, :token])
   end
 
-  def get(id), do: Repo.get(User, id)
+  def get(id) do
+    Repo.get(User, id)
+  end
 
   def insert_or_update(changeset) do
     case Repo.get_by(User, email: changeset.changes.email) do

@@ -8,6 +8,7 @@ defmodule Discuss.Topic do
 
   schema "topics" do
     field :title, :string
+    belongs_to :user, Discuss.User
   end
 
   def changeset(struct, params \\ %{}) do
@@ -16,8 +17,10 @@ defmodule Discuss.Topic do
     |> validate_required([:title])
   end
 
-  def save(topic) do
-    Topic.changeset(%Topic{}, topic)
+  def save(topic, user) do
+    user
+    |> Ecto.build_assoc(:topics)
+    |> Topic.changeset(topic)
     |> Repo.insert()
   end
 
