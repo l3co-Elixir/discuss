@@ -9,6 +9,7 @@ defmodule Discuss.User do
     field :provider, :string
     field :token, :string
     has_many :topics, Discuss.Topic
+    has_many  :comments, Discuss.Comment
   end
 
   def changeset(struct, params \\ %{}) do
