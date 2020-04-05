@@ -2,9 +2,10 @@ defmodule Discuss.Topic do
   use Ecto.Schema
 
   import Ecto.Changeset
+  import Ecto.Query
 
   alias Discuss.Repo
-  alias Discuss.Topic
+  alias Discuss.{Topic, User, Comment}
 
   schema "topics" do
     field :title, :string
@@ -31,6 +32,8 @@ defmodule Discuss.Topic do
 
   def get_by_id(id) do
     topic = Repo.get(Topic, id)
+    |> Repo.preload([:comments, :user])
+
     %{topic: topic, changeset: Topic.changeset(topic)}
   end
 
